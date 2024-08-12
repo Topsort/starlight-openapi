@@ -19,7 +19,8 @@ const hasOneType = Object.keys(content).length === 1
     <div>
       {Object.entries(content).map(([type, media]) => {
         return (
-          <div data-openapi-content-type={type}>
+          <div class="sl-oa-schema" data-openapi-content-type={type}>
+            <div class="sl-oa-schema-type">{type}</div>
             <Schema
               example={media.example}
               examples={isExamples(media.examples) ? media.examples : undefined}
