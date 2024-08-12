@@ -22,11 +22,22 @@ const parametersByLocation = getParametersByLocation(operation.parameters, pathI
       {[...parametersByLocation.entries()].map(([location, parameters]) => (
         <div class="">
           <h3>{`${capitalize(location)} Parameters`}</h3>
-          {[...parameters.values()].map((parameter) => (
-            <Parameter {parameter} />
-          ))}
+          <details class="root" open={true}>
+            <summary class="">
+              <span class="type">object</span>
+            </summary>
+            {[...parameters.values()].map((parameter) => (
+              <Parameter {parameter} />
+            ))}
+          </details>
         </div>
       ))}
     </>
   )
 }
+
+<style>
+  details.root > summary {
+    display: none;
+  }
+</style>
