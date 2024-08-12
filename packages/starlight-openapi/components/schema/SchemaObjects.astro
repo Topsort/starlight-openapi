@@ -33,7 +33,7 @@ const humanReadableType: Record<SchemaObjects['type'], string> = {
 ---
 
 <div>
-  <span class="type">{humanReadableType[type]}:</span>
+  <span class="sl-oa-group-type">{humanReadableType[type]}:</span>
   {discriminatorPropertyName && <Tag>discriminator: {discriminatorPropertyName}</Tag>}
 </div>
 <Tabs>
@@ -49,11 +49,5 @@ const humanReadableType: Record<SchemaObjects['type'], string> = {
 <style>
   div {
     margin-bottom: 0.5rem;
-  }
-
-  .type {
-    margin-inline-end: 0.3rem;
-    text-decoration: underline;
-    text-underline-offset: 0.3rem;
   }
 </style>
