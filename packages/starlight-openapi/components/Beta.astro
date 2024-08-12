@@ -1,0 +1,17 @@
+---
+import { Aside } from '@astrojs/starlight/components'
+
+interface Props {
+  beta: boolean | undefined
+}
+
+const { beta } = Astro.props
+---
+
+{
+  beta && (
+    <Aside type="note" title="Operation is in beta">
+      There might be changes in the future.
+    </Aside>
+  )
+}

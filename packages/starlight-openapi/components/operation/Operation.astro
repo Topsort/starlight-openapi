@@ -1,6 +1,7 @@
 ---
 import type { PathItemOperation } from '../../libs/operation'
 import type { Schema } from '../../libs/schema'
+import Beta from '../Beta.astro'
 import Deprecated from '../Deprecated.astro'
 import ExternalDocs from '../ExternalDocs.astro'
 import Md from '../Md.astro'
@@ -17,9 +18,11 @@ interface Props {
 
 const { operation: pathItemOperation, schema } = Astro.props
 const { operation } = pathItemOperation
+const isBeta = pathItemOperation.title.includes('[BETA]')
 ---
 
 <Deprecated deprecated={operation.deprecated} />
+<Beta beta={isBeta} />
 <OperationDescription operation={pathItemOperation} {schema} />
 <Md text={operation.description} />
 <ExternalDocs docs={operation.externalDocs} />
