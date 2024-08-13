@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "@readme/openapi-parser": "2.5.0",
-    "github-slugger": "2.0.0"
+    "github-slugger": "2.0.0",
+    "simple-stack-query": "^0.2.0"
   },
   "devDependencies": {
     "@astrojs/starlight": "0.24.4",

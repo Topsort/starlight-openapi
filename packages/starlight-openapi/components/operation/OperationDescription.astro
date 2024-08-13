@@ -18,7 +18,7 @@ const { method, path } = pathItemOperation
 const urls = getOperationURLs(schema.document, pathItemOperation)
 ---
 
-<div class="not-content">
+<div class="not-content operation-description-container">
   {
     path ? (
       urls.length > 0 ? (
@@ -42,6 +42,10 @@ const urls = getOperationURLs(schema.document, pathItemOperation)
       <OperationMethod {method} />
     )
   }
+  <div class="extra-links">
+    <a href="/api/authentication">Authentication</a>
+    <a href="/api/errors">Error reference</a>
+  </div>
 </div>
 
 <style>

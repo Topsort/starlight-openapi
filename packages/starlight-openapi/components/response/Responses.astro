@@ -1,4 +1,6 @@
 ---
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+
 import type { Operation } from '../../libs/operation'
 import { includesDefaultResponse, type Responses } from '../../libs/response'
 import type { Schema } from '../../libs/schema'
@@ -17,17 +19,25 @@ const { operation, responses, schema } = Astro.props
 {
   responses && (
     <>
-      <h2 id="responses">Responses</h2>
-      {Object.entries(responses).map(([name, response]) => {
-        if (name === 'default') {
-          return null
-        }
+      <h3 id="responses">Responses</h3>
+      <Tabs>
+        {Object.entries(responses).map(([name, response]) => {
+          if (name === 'default') {
+            return null
+          }
 
-        return <Response {name} {operation} {response} {schema} />
-      })}
-      {includesDefaultResponse(responses) && (
-        <Response name="default" {operation} response={responses['default']} {schema} />
-      )}
+          return (
+            <TabItem label={name}>
+              <Response {name} {operation} {response} {schema} />
+            </TabItem>
+          )
+        })}
+        {includesDefaultResponse(responses) && (
+          <TabItem label="default">
+            <Response name="default" {operation} response={responses['default']} {schema} />
+          </TabItem>
+        )}
+      </Tabs>
     </>
   )
 }

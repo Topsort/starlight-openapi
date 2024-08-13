@@ -13,7 +13,6 @@ import type { Schema } from '../../libs/schema'
 import Content from '../Content.astro'
 import Md from '../Md.astro'
 import SchemaObject from '../schema/SchemaObject.astro'
-import Section from '../Section.astro'
 import Select from '../Select.astro'
 
 import ResponseExamples from './ResponseExamples.astro'
@@ -26,17 +25,15 @@ interface Props {
   schema: Schema
 }
 
-const { name, operation, response, schema } = Astro.props
+const { operation, response, schema } = Astro.props
 
 const openAPIV2ResponseSchema = getOpenAPIV2ResponseSchema(response)
 const openAPIV3ResponseContent = getOpenAPIV3ResponseContent(response)
 
 const produces = getOpenAPIV2OperationProduces(schema, operation)
-
-const isEmpty = !openAPIV2ResponseSchema && !openAPIV3ResponseContent
 ---
 
-<Section empty={isEmpty} title={name}>
+<div>
   <Md text={response.description} slot="pre-panel" />
   {
     openAPIV2ResponseSchema ? (
@@ -50,4 +47,4 @@ const isEmpty = !openAPIV2ResponseSchema && !openAPIV3ResponseContent
   }
   {isResponseWithHeaders(response) && <ResponseHeaders headers={response.headers} slot="post-panel" />}
   {isOpenAPIV2ResponseWithExamples(response) && <ResponseExamples examples={response.examples} slot="post-panel" />}
-</Section>
+</div>

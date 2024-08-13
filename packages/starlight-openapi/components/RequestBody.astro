@@ -10,7 +10,6 @@ import type { Schema } from '../libs/schema'
 import Content from './Content.astro'
 import Md from './Md.astro'
 import SchemaObject from './schema/SchemaObject.astro'
-import Section from './Section.astro'
 import Select from './Select.astro'
 
 interface Props {
@@ -33,13 +32,11 @@ const consumes = getOpenAPIV2OperationConsumes(schema, operation)
 
 {
   hasRequestBody && (
-    <Section level={2} title="Request Body">
-      {openAPIV3RequestBody?.required && (
-        <sup class="required" slot="post-title">
-          required
-        </sup>
-      )}
-      <Md text={description} slot="pre-panel" />
+    <div>
+      <h3>Request Body</h3>
+      <div class="mb-5">
+        <Md text={description} slot="pre-panel" />
+      </div>
       {openAPIV2RequestBodyParameter ? (
         <>
           <Select label="The list of MIME types the operation can consume" options={consumes} />
@@ -48,7 +45,7 @@ const consumes = getOpenAPIV2OperationConsumes(schema, operation)
       ) : openAPIV3RequestBody ? (
         <Content content={openAPIV3RequestBody.content} />
       ) : null}
-    </Section>
+    </div>
   )
 }
 

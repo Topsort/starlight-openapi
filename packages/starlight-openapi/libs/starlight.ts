@@ -29,6 +29,10 @@ export function getPageProps(title: string, schema: Schema, pathItemOperation?: 
     frontmatter: {
       title,
     },
+    openapi: {
+      pathItemOperation: pathItemOperation,
+      schema: schema,
+    },
     headings: isOverview ? getOverviewHeadings(schema) : getOperationHeadings(schema, pathItemOperation),
   }
 }
@@ -170,6 +174,10 @@ interface SidebarLink {
 interface StarlightPageProps {
   frontmatter: {
     title: string
+  }
+  openapi: {
+    pathItemOperation: PathItemOperation | undefined
+    schema: Schema
   }
   headings: MarkdownHeading[]
 }

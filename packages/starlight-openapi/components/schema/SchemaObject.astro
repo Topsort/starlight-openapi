@@ -6,7 +6,6 @@ import {
   isSchemaObjectObject,
   type SchemaObject,
 } from '../../libs/schemaObject'
-import Example from '../example/Example.astro'
 import ExternalDocs from '../ExternalDocs.astro'
 import Items from '../Items.astro'
 import Md from '../Md.astro'
@@ -22,7 +21,7 @@ interface Props {
   schemaObject: SchemaObject
 }
 
-const { hideExample = false, negated, nested = false, schemaObject } = Astro.props
+const { negated, nested = false, schemaObject } = Astro.props
 
 const schemaObjects = getSchemaObjects(schemaObject)
 
@@ -46,7 +45,6 @@ const isNegated = schemaObject.not !== undefined
       ) : (
         <Items items={schemaObject} {negated} nullable={getNullable(schemaObject)} />
       )}
-      {!hideExample && schemaObject.example && <Example raw={schemaObject.example} />}
     </>
   )
 }
