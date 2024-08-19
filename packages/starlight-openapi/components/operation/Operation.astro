@@ -8,6 +8,7 @@ import Md from '../Md.astro'
 import Parameters from '../parameter/Parameters.astro'
 import RequestBody from '../RequestBody.astro'
 import Responses from '../response/Responses.astro'
+import Authorizations from '../security/Authorizations.astro'
 
 import OperationDescription from './OperationDescription.astro'
 
@@ -26,6 +27,7 @@ const isBeta = pathItemOperation.title.includes('[BETA]')
 <OperationDescription operation={pathItemOperation} {schema} />
 <Md text={operation.description} />
 <ExternalDocs docs={operation.externalDocs} />
+<Authorizations />
 <Parameters operation={pathItemOperation} />
 <RequestBody {operation} {schema} />
 <Responses {operation} responses={operation.responses} {schema} />

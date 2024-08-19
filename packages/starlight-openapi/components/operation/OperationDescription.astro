@@ -1,6 +1,4 @@
 ---
-import { Icon } from '@astrojs/starlight/components'
-
 import { getOperationURLs, type PathItemOperation } from '../../libs/operation'
 import type { Schema } from '../../libs/schema'
 
@@ -22,11 +20,9 @@ const urls = getOperationURLs(schema.document, pathItemOperation)
   {
     path ? (
       urls.length > 0 ? (
-        <details class="operation-description-urls">
-          <summary>
-            <OperationMethod {method} {path} />
-            <Icon class="caret" name="right-caret" size="1.25rem" />
-          </summary>
+        <details class="operation-description-urls" open={true}>
+          <summary></summary>
+          <OperationMethod {method} {path} />
           <ul>
             {urls.map(({ description, url }) => (
               <OperationUrl {description} {url} />
@@ -42,10 +38,6 @@ const urls = getOperationURLs(schema.document, pathItemOperation)
       <OperationMethod {method} />
     )
   }
-  <div class="extra-links">
-    <a href="/api/authentication">Authentication</a>
-    <a href="/api/errors">Error reference</a>
-  </div>
 </div>
 
 <style>
@@ -54,18 +46,10 @@ const urls = getOperationURLs(schema.document, pathItemOperation)
     background-color: var(--astro-code-color-background);
     border: 1px solid var(--sl-color-gray-5);
     font-size: var(--sl-text-sm);
-    margin-bottom: 2.5rem;
   }
 
   summary {
-    color: var(--sl-color-gray-1);
-    cursor: pointer;
-    justify-content: space-between;
-    list-style-type: none;
-  }
-
-  summary:hover {
-    color: var(--sl-color-gray-2);
+    display: none;
   }
 
   summary,
@@ -81,31 +65,11 @@ const urls = getOperationURLs(schema.document, pathItemOperation)
     display: none;
   }
 
-  .caret {
-    flex-shrink: 0;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .caret {
-      transition: transform 0.2s ease-in-out;
-    }
-  }
-
-  details[open] .caret {
-    transform: rotateZ(90deg);
-  }
-
-  :global([dir='rtl']) .caret {
-    transform: rotateZ(180deg);
-  }
-
   ul {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
     list-style-type: none;
-    padding-block-start: 0.5rem;
-    padding-block-end: 1rem;
-    padding-inline: 1rem;
+    margin-left: 0;
   }
 </style>
