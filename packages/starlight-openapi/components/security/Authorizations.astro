@@ -1,0 +1,43 @@
+---
+import Key from '../Key.astro'
+---
+
+<div>
+  <h3>Authentication</h3>
+
+  <p>
+    Topsort’s APIs are authenticated via bearer tokens. Requests must include an authorization header containing your
+    private API key.
+  </p>
+
+  <p>Don't have an API key yet? <a href="/api/authentication">Learn how to generate one</a>.</p>
+
+  <div class="sl-oa-schema">
+    <details class="root" open={true}>
+      <summary></summary>
+      <Key name="Authorization" required={true}>
+        <div>
+          <span class="type">string</span>
+        </div>
+
+        <div>
+          <p>The header containing a private API key. Format this header as follows:</p>
+
+          <p><code>Authorization: Bearer &lt;YOUR-API-KEY&gt;</code></p>
+        </div>
+      </Key>
+    </details>
+  </div>
+</div>
+
+<style>
+  details.root > summary {
+    display: none;
+  }
+
+  .type {
+    color: var(--sl-color-text-accent);
+    font-weight: 600;
+    margin-inline-end: 0.3rem;
+  }
+</style>
