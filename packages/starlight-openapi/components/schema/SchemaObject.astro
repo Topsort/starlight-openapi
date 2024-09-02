@@ -19,9 +19,10 @@ interface Props {
   negated?: boolean
   nested?: boolean
   schemaObject: SchemaObject
+  contentType?: string | undefined
 }
 
-const { negated, nested = false, schemaObject } = Astro.props
+const { negated, nested = false, schemaObject, contentType } = Astro.props
 
 const schemaObjects = getSchemaObjects(schemaObject)
 
@@ -39,7 +40,7 @@ const isNegated = schemaObject.not !== undefined
       <Md text={schemaObject.description} />
       <ExternalDocs docs={schemaObject.externalDocs} />
       {isSchemaObjectObject(schemaObject) ? (
-        <SchemaObjectObject {nested} {schemaObject} />
+        <SchemaObjectObject {nested} {schemaObject} {contentType} />
       ) : isSchemaObjectAllOf(schemaObject) ? (
         <SchemaObjectAllOf {schemaObject} />
       ) : (

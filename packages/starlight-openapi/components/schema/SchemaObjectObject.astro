@@ -12,14 +12,16 @@ import SchemaObjectObjectProperties from './SchemaObjectObjectProperties.astro'
 interface Props {
   nested: boolean
   schemaObject: SchemaObject
+  contentType?: string | undefined
 }
 
-const { nested, schemaObject } = Astro.props
+const { nested, schemaObject, contentType } = Astro.props
 
 const properties = getProperties(schemaObject)
 ---
 
 <details class:list={[!nested && 'root']} open={!nested}>
+  <div class="sl-oa-schema-type">{contentType}</div>
   <summary>
     <span class="type">object</span>
     <Icon class="caret" name="right-caret" size="1.25rem" />
