@@ -1,16 +1,49 @@
 ---
+import type { Schema } from '../../libs/schema'
 import Key from '../Key.astro'
+
+interface Props {
+  schema: Schema
+}
+
+interface KeyInfo {
+  name: string
+  private: boolean
+}
+
+const { schema } = Astro.props
+
+// allowlist of openapi files and key types.
+const keyInfoPerFile: Record<string, KeyInfo> = {
+  'openapi/v1.yml': {
+    name: 'Marketplace',
+    private: false,
+  },
+  'openapi/v2.yml': {
+    name: 'Marketplace',
+    private: false,
+  },
+  'openapi/cs.yml': {
+    name: 'Advanced',
+    private: true,
+  },
+}
+
+const key = keyInfoPerFile[schema.config.schema]
+if (key === undefined) {
+  throw new Error(`unknown openapi file ${schema.config.schema}`)
+}
 ---
 
 <div>
   <h3>Authentication</h3>
 
   <p>
-    Topsort’s APIs are authenticated via bearer tokens. Requests must include an authorization header containing your
-    private API key.
+    The Topsort API uses bearer tokens for authentication. Requests must include an authorization header containing a
+    valid API key as a token.
   </p>
 
-  <p>Don't have an API key yet? <a href="/api/authentication">Learn how to generate one</a>.</p>
+  <p>Don't have API key(s) yet? <a href="/api/authentication">Learn how to generate them</a>.</p>
 
   <div class="sl-oa-schema">
     <details class="root" open={true}>
@@ -21,9 +54,20 @@ import Key from '../Key.astro'
         </div>
 
         <div>
-          <p>The header containing a private API key. Format this header as follows:</p>
-
-          <p><code>Authorization: Bearer &lt;YOUR-API-KEY&gt;</code></p>
+          <p>
+            Header containing your <strong>{key.name} API key</strong> as a token.
+            {
+              key.private ? (
+                <span>
+                  <strong>This key is confidential, use it server-side only.</strong>
+                </span>
+              ) : (
+                <span>This key is public, use it on both client and server.</span>
+              )
+            }
+          </p>
+          <p>Header format:</p>
+          <p><code>Authorization: Bearer &lt;YOUR-{key.name.toUpperCase()}-API-KEY&gt;</code></p>
         </div>
       </Key>
     </details>
