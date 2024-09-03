@@ -27,7 +27,7 @@ const isBeta = pathItemOperation.title.includes('[BETA]')
 <OperationDescription operation={pathItemOperation} {schema} />
 <Md text={operation.description} />
 <ExternalDocs docs={operation.externalDocs} />
-<Authorizations />
+<Authorizations {schema} />
 <Parameters operation={pathItemOperation} />
 <RequestBody {operation} {schema} />
 <Responses {operation} responses={operation.responses} {schema} />
